@@ -1,0 +1,28 @@
+{
+  "name": "contasoft",
+  "version": "0.0.2",
+  "private": true,
+  "scripts": {
+    "start": "iojs ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.10.2",
+    "cookie-parser": "~1.3.3",
+    "debug": "~2.1.1",
+    "ejs": "~2.2.3",
+    "enigma-code": "0.0.10",
+    "express": "~4.11.1",
+    "express-myconnection": "1.0.4",
+    "express-session": "^1.7.6",
+    "fluentreports": "^1.0.0",
+    "fs": "0.0.2",
+    "jquery": "^2.1.4",
+    "moment": "^2.10.6",
+    "morgan": "~1.5.1",
+    "multiparty": "^4.1.2",
+    "mysql": "2.5.4",
+    "node-schedule": "^0.2.9",
+    "qr-image": "^3.1.0",
+    "serve-favicon": "~2.2.0"
+  }
+}

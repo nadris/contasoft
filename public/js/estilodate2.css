@@ -1,0 +1,32 @@
+
+
+  .holder a.jp-previous { margin-right: 15px; }
+  .holder a.jp-next { margin-left: 15px; }
+
+  .holder a.jp-current, a.jp-current:hover {
+    color: #5C9DFF;
+    font-weight: bold;
+  }
+
+  .holder a.jp-disabled, a.jp-disabled:hover {
+    color: #bbb;
+  }
+
+  .holder a.jp-current, a.jp-current:hover,
+  .holder a.jp-disabled, a.jp-disabled:hover {
+    cursor: default;
+    background: none;
+  }
+
+  .holder span {
+   margin: 0 5px;
+    }
+  .ui-datepicker {
+   padding: .0.5em .0.5em 0; 
+   }
+  .ui-datepicker table {
+    width: 100;
+    font-size: 0.6em;
+    border-collapse: collapse;
+    margin:0 0 .3em; 
+    }

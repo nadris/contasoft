@@ -1,0 +1,76 @@
+<%- include menu.ejs%>
+
+  <div class="shadow cajacentral well ">
+  <h3>Asignar Procesos a Rol  <%= ro[0].nombre_r%> </h3>
+
+  <form action="/asignarprs" method="post">
+   <input type="hidden" value="<%= ro[0].cod_r%>" name="codr">
+   <% 
+     if (dat.length) {
+
+      for (var i = 0; i < pr.length; i++) {
+        var x=pr[i].cod_p;
+        for (var j = 0; j < dat.length; j++) {
+          var y=dat[j].codrp_p;
+          if(x==y){
+
+
+        %>
+
+          <div class="checkbox"><label> <input type="checkbox" value="<%= pr[i].cod_p%>"  name="pr" checked> <%= pr[i].nombre_p%></label></div>
+
+
+
+
+        <%
+        }
+
+    
+
+        }
+
+      }
+%>
+<%
+     } else{
+
+
+     } 
+
+   %>
+     <%
+     for (var z = 0; z < dat3.length; z++) {
+          %>
+<div class="checkbox"><label> <input type="checkbox" value="<%= dat3[z].cod_p%>"  name="pr" > <%= dat3[z].nombre_p%></label></div>
+
+          <%
+
+        }%>
+  
+
+    <fieldset>
+
+      <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+         <button type="submit" class="btn btn-primary">Agregar</button>
+        <a href="/roles" class="btn btn-default" >Cancelar</a>
+        
+      </div>
+    </div>
+
+  </fieldset>
+
+</form>
+
+
+  
+      
+
+
+    
+
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,154 @@
+<%- include menu.ejs%>
+
+<div class="shadow cajacentral well ">
+<form class="form-horizontal" id="log" action="/agregarcus" method="POST"  >
+ <fieldset>
+    <legend>Agregar Cuenta Contable</legend>
+          <div class="form-group">
+              <label for="inputEmail" class="col-lg-2 control-label">Codigo Cuenta</label>
+              <div class="col-lg-10">
+                <input class="form-control"  name="codigocu" placeholder="Codigo de Cuenta" type="text">
+              </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputEmail" class="col-lg-2 control-label">Nombre Codigo</label>
+            <div class="col-lg-10">
+              <input class="form-control"  placeholder="Nombres Cuenta Contable " type="text" name="nombcu">
+            </div>
+          </div>
+
+           <div class="form-group">
+            <label for="inputEmail" class="col-lg-2 control-label">Grupo Codigo</label>
+            <div class="col-lg-10">
+              <input class="form-control"  placeholder="Grupo del Codigo " type="text" name="grupocu">
+            </div>
+          </div>
+
+           <div class="form-group">
+            <label for="inputEmail" class="col-lg-2 control-label">Vida Util</label>
+            <div class="col-lg-10">
+              <input class="form-control"  placeholder="Vida Util Grupo de activo Fijo" type="text" name="vidaucu">
+            </div>
+          </div>
+
+            
+          <div class="form-group">
+            <label for="textArea" class="col-lg-2 control-label">Descripcion Cuenta Contable</label>
+            <div class="col-lg-10">
+              <textarea style="width: 409px; height: 193px;" class="form-control" rows="3" id="textArea" name="descrip"></textarea>
+              <span class="help-block">Describa correctamente y completamente  la cuenta contable.</span>
+            </div>
+
+          </div>
+          
+       
+          <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+               <button type="submit" class="btn btn-primary">Agregar</button>
+              <button type="reset" class="btn btn-default" onclick="location.href='/cuentacontables'">Cancelar</button>
+              
+            </div>
+          </div>
+
+
+
+
+</fieldset>
+</form>
+</div>
+
+
+ <script type="text/javascript" src="/../js/jquery.validate.min.js"></script>
+    <script type="text/javascript">
+'use strict'
+
+        $(document).ready(function(){
+          jQuery.validator.addMethod("bcu",function(value,element){
+                                 var response=0;
+                                         var datas = {};
+                                          datas.codcu = value;
+                                          $.ajax({
+                                          type: 'POST',
+                                          async:false,
+                                          data: JSON.stringify(datas),
+                                          contentType: 'application/json',
+                                          url: '/bcu',            
+                                          success: function(data) {
+                                           response=data;
+                                           //alert(response);
+                                           }
+                                         });
+                                          return (response==1);}, "Codigo Cuenta Contable ya registrada en el Sistema");
+            
+            $("#log").validate({
+
+                rules:{
+                    "codigocu":{
+                      required:true,
+                      digits:true,
+                      bcu:true,
+                      maxlength:5,},
+
+                      "nombcu":{
+                        required:true,
+                      },
+                      "grupocu":{
+                        required:true,
+                        digits:true,
+
+                      },
+                      "vidaucu":{
+                        required:true,
+                        digits:true,
+
+                      },
+                      "descrip":{
+                        maxlength:200,
+                      }
+
+                   
+
+                    
+                   
+                },
+                messages: {
+                    codigocu:{
+                        required:"Ingrese Codigo de la Cuenta Contable",
+                        digits:"Ingrese solo Numeros",
+                        maxlength:"Maximo un Numero de 5 digitos ",},
+
+                        nombcu:{
+                          required:"Ingrese Nombre de Cuenta Contable",
+                        },
+                        grupocu:{
+                          required:"Ingrese Grupo de Cuenta Contable",
+                          digits:"Ingrese solo Numeros",
+
+                        },
+                        vidaucu:{
+                          required:"Ingrese Vida Util",
+                          digits:"Ingrese solo Numeros",
+
+                        },
+                        descrip:{
+                          maxlength:"Excedio la cadena Maxima"
+                        }
+
+                        
+                    
+                
+
+
+                    
+                }
+
+            });
+        });
+    </script>
+
+</body>
+
+  
+
+</html>

@@ -1,0 +1,43 @@
+<%- include menu.ejs%>
+
+
+<div>
+<h3>REPORTE USUARIOS</h3>
+<div id="canvas-holder">
+
+			<canvas id="chart-area" width="400" height="400"/>
+
+</div>
+</div>
+<script>
+var dato1=<%= dato %>;
+var dato2=12;
+		var pieData = [
+				{
+					value: dato1,
+					color:"#F7464A",
+					highlight: "#FF5A5E",
+					label: "Usuarios Activos"
+				},
+				{
+					value: dato2,
+					color: "#46BFBD",
+					highlight: "#5AD3D1",
+					label: "Usuarios dados de Baja"
+				},
+				
+				
+
+			];
+
+			window.onload = function(){
+				var ctx = document.getElementById("chart-area").getContext("2d");
+				window.myPie = new Chart(ctx).Pie(pieData);
+			};
+
+
+</script>
+
+</body>
+
+</html>

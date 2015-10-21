@@ -1,0 +1,135 @@
+<%- include menu.ejs%>
+
+<div class="shadow cajacentral well ">
+<form class="form-horizontal" id="log" action="/agregarunids" method="POST"  >
+ <fieldset>
+    <legend>Agregar Unidad</legend>
+
+          <div class="form-group">
+              <label for="inputEmail" class="col-lg-3 control-label">Nombre Unidad</label>
+              <div class="col-lg-9">
+                <input class="form-control"  name="nombre_unid" placeholder="Ingrese Nombre de una Unidad" type="text" >
+              </div>
+          </div>
+
+          
+
+           <div class="form-group">
+            <label for="textArea" class="col-lg-3 control-label">Descripcion Unidad</label>
+            <div class="col-lg-9">
+              <textarea style="width: 409px; height: 193px;" class="form-control" rows="3" id="textArea" name="descrip_unid"></textarea>
+              <span class="help-block">Describa correctamente y completamente  la Descripcion de la Unidad.</span>
+            </div>
+
+          </div>
+
+
+           <div class="form-group">
+            <label for="textArea" class="col-lg-3 control-label">Direccion Unidad</label>
+            <div class="col-lg-9">
+              <textarea style="width: 409px; height: 193px;" class="form-control" rows="3" id="textArea" name="dir_unid"></textarea>
+              <span class="help-block">Describa correctamente y completamente  la Direccion de la Unidad.</span>
+            </div>
+
+          </div>
+
+          
+
+           
+
+           
+       
+          <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+               <button type="submit" class="btn btn-primary">Agregar</button>
+              <button type="reset" class="btn btn-default" onclick="location.href='/unidades'">Cancelar</button>
+              
+            </div>
+          </div>
+
+
+
+
+</fieldset>
+</form>
+</div>
+
+
+ <script type="text/javascript" src="/../js/jquery.validate.min.js"></script>
+    <script type="text/javascript">
+'use strict'
+
+        $(document).ready(function(){
+
+
+      $.validator.addMethod("codigo",function(value,element)
+{
+return this.optional(element) || /^\d{1}-\d{2}-\d{4}$/.test(value);
+},"Ingresa en mal Formato ");
+
+
+      $.validator.addMethod("letras",function(value,element)
+{
+return this.optional(element) || /^[a-zA-ZñÑéáíóúüÁÉÓÚÜ1234567890#_]+( [a-zA-ZñÑéáíóúüÁÉÓÚÜ1234567890#]+)*$/.test(value);
+},"Ingresa un nombre correcto");
+
+
+
+      $.validator.addMethod("letras2",function(value,element)
+{
+return this.optional(element) || /^[a-zA-ZñÑéáíóúüÁÉÓÚÜ_]+( [a-zA-ZñÑéáíóúüÁÉÓÚÜ_]+)*$/.test(value);
+},"Ingresa un nombre correcto");
+
+
+            $("#log").validate({
+
+                rules:{
+                    "nombre_unid":{
+                      required:true,
+                      letras2:true,
+                      maxlength:50,
+
+                      },
+
+                      "dir_unid":{
+                         required:true,
+                         maxlength:200,
+                         //letras:true,
+                         
+                      },
+                      "descrip_unid":{
+                         letras:true,
+                         maxlength:200,
+                         
+                      }
+                   
+
+                    
+                   
+                },
+                messages: {
+                    nombre_unid:{
+                        required:"Ingrese Datos son requeridos",
+                         maxlength:"Exedio la cadena de caracteres",
+                       },
+                       dir_unid:{
+                        required:"Ingrese Datos son requeridos",
+                        maxlength:"Exedio la cadena de caracteres",
+                       },
+                       descrip_unid:{
+
+                        maxlength:"Exedio la cadena de caracteres",
+                       }
+                       
+                    
+                }
+
+            });
+        });
+    </script>
+
+</body>
+
+  
+
+</html>

@@ -1,0 +1,46 @@
+.esp{
+	height: 50px;
+}
+.logeo{
+	margin-left: 33%;
+	margin-top: 9%;
+
+}
+.form-group{
+	margin-top: 15px;
+}
+.flaty{
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	background-color: #2C3E50;
+}
+.paper{
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	background-color: #2196F3;
+}
+.yeti{
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	background-color: #008CBA;
+}
+.united{
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	background-color: #DD4814;
+}
+.flaty:hover{
+		box-shadow: 2px 2px 2px rgba(68,68,68,0.6);
+
+}
+.selcol{
+	display: inline-block;
+}
+.error{
+	color: red !important;
+
+}

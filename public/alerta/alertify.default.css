@@ -1,0 +1,78 @@
+/**
+ * Default Look and Feel
+ */
+.alertify,
+.alertify-log {
+	font-family: sans-serif;
+}
+.alertify {
+	background: #FFF;
+	border-radius: 3px;
+	/*border : 2px solid #511C39;*/
+
+	-webkit-background-clip: padding;     /* Safari 4? Chrome 6? */
+	   -moz-background-clip: padding;     /* Firefox 3.6 */
+	        background-clip: padding-box; 
+	        /* Firefox 4, Safari 5, Opera 10, IE 9 */
+	          -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+       -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+            box-shadow:0 1px 4px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+}
+.alertify-text {
+	border: 1px solid #CCC;
+	padding: 10px;
+	border-radius: 4px;
+}
+.alertify-button {
+	border-radius: 4px;
+	color: white;
+	font-weight: bold;
+	padding: 6px 15px;
+	text-decoration: none;
+	background-color: red;
+}
+
+.alertify-button:active {
+	position: relative;
+	top: 1px;
+}
+	.alertify-button-cancel {
+		background-color: #CD171E;
+
+	}
+	.alertify-button-ok {
+		background-color: #4BAD4F;
+		text-decoration: none !important;
+		color:white !important;
+
+	}
+
+.alertify-button-cancel:hover {
+		background-color: #CD171E;
+		color: white;
+		text-decoration: none;}
+
+	.alertify-button-ok:hover {
+		background-color: #4BAD4F;
+		color:white;
+		text-decoration: none;
+
+	}
+
+.alertify-log {
+	background: #1F1F1F;
+	background: rgba(0,0,0,.9);
+	padding: 15px;
+	border-radius: 4px;
+	color: #FFF;
+	text-shadow: -1px -1px 0 rgba(0,0,0,.5);
+}
+	.alertify-log-error {
+		background: #FE1A00;
+		background: rgba(254,26,0,.9);
+	}
+	.alertify-log-success {
+		background: #5CB811;
+		background: rgba(92,184,17,.9);
+	}

@@ -1,0 +1,276 @@
+	
+<%- include menu.ejs%>
+
+
+
+
+
+	<div class="shadow cajacentral well ">
+<table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <th>NRO</th>
+      <th>CI</th>
+      <th>NOMBRES</th>
+      <th>APELLIDOS</th>
+      <th>DIRECCION</th>
+      <th>TELEFONO</th>
+      <th>ESTADO</th>
+      <th>MODIFICAR</th>
+      <th>ELIMINAR</th>
+      <th>VER</th>
+    </tr>
+  </thead>
+  <tbody id="tablu"> 
+
+<div>
+
+	
+
+	<div class="form-group">
+	<center>
+  <label class="control-label">GESTION USUARIOS</label>
+  </center>
+    <br>
+  <form action="/filtrousu" method="POST" id="log">
+  <div class="input-group"> 
+    <span class="input-group-addon">Nombre:</span>
+    <input class="form-control" type="text" value="<%=filtrodato%>" name="filtrodato" >
+    <span class="input-group-btn">
+      <button class="btn btn-default" type="submit">Buscar</button>
+    </span>
+  </div>
+
+        </form>
+</div>
+</div>
+
+
+
+
+    <% if(tusu.length) {
+                for(var i=0; i<tusu.length; i++){ %>
+                    <tr class="active">
+                    	<td><%= [i+1]%></td>	
+                        <td><%= tusu[i].ci_u %></td>
+                        <td><%= tusu[i].nomb_u %></td>
+                        <td><%= tusu[i].apellp_u %> <%= tusu[i].apellm_u %></td>
+                        <td><%= tusu[i].dir_u%></td>
+                        <td><%= tusu[i].telf_u%></td>
+                        <%
+                        var estado=1;
+                        var x=tusu[i].e_u;
+
+                    
+                     
+                      var ci=u[0].ci_u;
+                         if(ci!=tusu[i].ci_u) {
+                        if(x==1){%>
+							
+                         <td><a href="#" class="btn btn-success tam" onclick="baja(<%=tusu[i].ci_u%>)">Activo</a></td>
+                        <% }else{ %>
+
+                         <td><a href="#" class="btn btn-danger tam" onclick="activo(<%=tusu[i].ci_u%>)">Baja</a></td>
+                        <% } }else{%>
+                        <td>Session Activa</td>
+                        <%}%>
+                        
+
+
+                        <td>
+                        <form action="/modificarusu" method="post">
+                          <input type="hidden" name="ci"value="<%= tusu[i].ci_u %>">
+                          <button class="btn btn-info tam2">Modificar</button>
+                        </form>
+
+        
+
+                        </td>
+
+
+                        <%
+                        if(ci!=tusu[i].ci_u) {
+                          %>
+                        <td><a href="#" class="btn btn-warning tam2" onclick="eliminar(<%=tusu[i].ci_u%>,'<%=tusu[i].nomb_u%>','<%=tusu[i].apellp_u%>','<%=tusu[i].apellm_u%>')">Eliminar</a></td>
+                      <% }else{%>
+                       <td>Session Activa</td>
+        
+<%
+                       }%>
+
+                        <td><a href="#" class="btn btn-default tam" onclick="ver(<%= tusu[i].ci_u%>)">Ver</a></td>
+
+                    </tr>
+
+
+
+
+
+            <%    }
+            }else{ %>
+
+            <tr>
+                <td colspan="5">Ningun Usuario</td>
+            </tr>
+
+            <%
+            }  %>
+
+  </tbody>
+</table> 
+
+<center>  <div class="holder" ></div></center>
+
+
+	</div>
+</div>
+	
+		
+
+</div>
+
+ 
+
+</div>
+
+ <ul id="menu" class="mfb-component--br mfb-zoomin" data-mfb-toggle="hover">
+      <li class="mfb-component__wrap">
+        <a  class="mfb-component__button--main">
+          <i class="mfb-component__main-icon--resting ion-navicon-round"></i>
+          <i class="mfb-component__main-icon--active ion-close-round"></i>
+        </a>
+
+        <ul class="mfb-component__list">
+          <li>
+            <a href="/agregarusu" data-mfb-label="Agregar Usuario" class="mfb-component__button--child">
+              <i class="mfb-component__child-icon ion-person-add"></i>
+            </a>
+          </li>
+
+          <li>
+            <a href="/reporte" data-mfb-label="Reporte" class="mfb-component__button--child">
+              <i class="mfb-component__child-icon ion-pie-graph"></i>
+            </a>
+          </li>
+    
+          <li>
+            <a href="/darpdf" data-mfb-label="ReportePDF" class="mfb-component__button--child">
+              <i class="mfb-component__child-icon ion-document-text"></i>
+            </a>
+          </li>
+
+         
+        
+
+
+
+        </ul>
+      </li>
+    </ul>
+
+
+ 
+<script type="text/javascript">
+
+function activo(uno){
+                                         var datas = {};
+                                          datas.codu= uno;                
+                                          $.ajax({
+                                          type: 'POST',
+                                          data: JSON.stringify(datas),
+                                          contentType: 'application/json',
+                                          url: 'http://localhost:3000/activarusu',            
+                                          success: function(data) {
+                                            location.href="/usuarios";
+                                            }
+                                    
+                                                      });
+}
+
+
+
+"use strict"
+    $(function(){
+      $("div.holder").jPages({
+        containerID : "tablu",
+        previous : "Anterior",
+        next : "Siguiente",
+        perPage :5 ,
+        delay : 70
+      });
+    });
+
+    function eliminar(uno,dos,tres,cuatro){
+       alertify.confirm("<p> Desa Eliminar el Usuario del Sistema  a : </br>" +dos+"  "+ tres+ " "+cuatro+" ? </p>",function(e){
+        if(e){
+                                           var datas = {};
+                                          datas.codu= uno;                
+                                          $.ajax({
+                                          type: 'POST',
+                                          data: JSON.stringify(datas),
+                                          contentType: 'application/json',
+                                          url: 'http://localhost:3000/eliminarusu',            
+                                          success: function(data) {
+                                            location.href="/usuarios";
+                                            }
+                                    
+                                                      });
+
+        }
+        else{
+
+        }
+       })
+      }
+
+  function ver(uno){
+       var datas = {};
+                                          datas.codu= uno;
+                                          
+                                        
+    
+                                          $.ajax({
+                                          type: 'POST',
+                                          data: JSON.stringify(datas),
+                                          contentType: 'application/json',
+                                          url: 'http://localhost:3000/buscaru',            
+                                          success: function(data) {
+                                            var x=JSON.parse(data);
+                                            
+                                            alertify.alert(
+
+                                              "<h5>DATOS DEL USUARIO</h5> <BR/>" +
+
+                                              "<img src='/fotos/"+x[0]['foto_u']  +"' alt='' class='pull-right' width='100px' height='100px'>"+
+
+                    
+                                              "<span class='label label-info pull-left'><strong>Cedula Identidad:  </strong> "+x[0]['ci_u']+"</span><BR/>"+
+
+                                              "<span class='pull-left'>Nombre :    "+x[0]['nomb_u']+" "+x[0]['apellp_u']+" "+ x[0]['apellm_u'] +"</span><br>"+
+
+                                              "<span class='pull-left'>Telefono :   " +x[0]['telf_u']+"</span><br>"+
+                                              "<span class='pull-left'>Fecha Nac.:  " +x[0]['fecha']+"</span> <br>"
+                                              +
+                                              "<span class='pull-left'>Direccion:  " +x[0]['dir_u']+"</span> <br>"
+
+
+
+                                              );
+                                             return false;
+                            
+                                             }
+                                                      });
+  }
+  
+     
+    </script>
+  
+
+
+
+
+</body>
+
+
+
+</html>

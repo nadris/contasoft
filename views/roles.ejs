@@ -1,0 +1,270 @@
+<%- include menu.ejs%>
+
+
+
+
+
+	<div class="shadow cajacentral well ">
+<table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <th>NRO</th>
+      <th>NOMBRE</th>
+      <th>ESTADO</th>
+      <th>MODIFICAR</th>
+      <th>ELIMINAR</th>
+      <th>VER</th>
+      <th>ASIGNAR PROCESOS</th>
+    </tr>
+  </thead>
+  <tbody id="tablu"> 
+
+<div>
+
+	
+
+	<div class="form-group">
+	<center>
+  <label class="control-label">GESTION ROLES</label>
+  </center>
+    <br>
+ <form action="/filtror" method="POST" id="log">
+  <div class="input-group">
+       
+          
+    <span class="input-group-addon">Nombre:</span>
+    <input class="form-control" type="text" value="<%= filtrodato%>" name="filtrodato" >
+    <span class="input-group-btn">
+      <button class="btn btn-default" type="submit">Buscar</button>
+    </span>
+  </div>
+
+        </form>
+
+
+
+</div>
+</div>
+
+
+
+
+    <% if(proc.length) {
+                for(var i=0; i<proc.length; i++){ %>
+                    <tr class="active">
+                    		
+                        <td><%= [i+1] %></td>
+                        <td><%= proc[i].nombre_r %></td>
+                  
+                      
+                        <%
+                      
+
+                    
+         
+                      var x=proc[i].e_r;
+                      
+                        if(x==1){%>
+							
+                         <td><span class="label label-success"> Activo</span></td>
+                        <% }else{ %>
+
+                         <td><span class="label label-danger">Baja</span></td>
+                        <% } %>
+                      
+                      
+              
+                        <td>
+
+                          <form action="/modificarr" method="post">
+                          <input type="hidden" value="<%= proc[i].cod_r %>" name="datah">
+                          <input type="submit" class="btn btn-info tam2" value="Modificar">
+                          </form>
+
+                         </td>
+                     
+                        <td><a href="#" class="btn btn-warning tam2" onclick="borrar('<%= proc[i].nombre_r%>',<%= proc[i].cod_r %>)">Eliminar</a></td>
+                     
+        
+
+
+                        <td><button class="btn btn-default tam" onclick="ver(<%= proc[i].cod_r %>)">Ver</button></td>
+
+
+                         <td>
+
+                          <form action="/asignarpr" method="post">
+                          <input type="hidden" value="<%= proc[i].cod_r %>" name="datah2">
+                          <input type="submit" class="btn btn-danger tam2" value="Asignar" >
+                          </form>
+
+                         </td>
+
+
+        
+
+
+                    </tr>
+
+
+
+
+
+            <%    }
+            }else{ %>
+
+            <tr>
+                <td colspan="5">Ningun Rol</td>
+            </tr>
+
+            <%
+            }  %>
+
+  </tbody>
+</table> 
+
+<center>  <div class="holder" ></div></center>
+
+
+	</div>
+</div>
+	<img src="" alt="">
+		
+
+</div>
+
+ 
+
+</div>
+
+
+<ul id="menu" class="mfb-component--br mfb-zoomin" data-mfb-toggle="hover">
+      <li class="mfb-component__wrap">
+        <a  class="mfb-component__button--main">
+          <i class="mfb-component__main-icon--resting ion-navicon-round"></i>
+          <i class="mfb-component__main-icon--active ion-close-round"></i>
+        </a>
+
+        <ul class="mfb-component__list">
+          <li>
+            <a href="/agregarr" data-mfb-label="Agregar Rol" class="mfb-component__button--child">
+              <i class="mfb-component__child-icon ion-plus-round"></i>
+            </a>
+          </li>
+
+          <li>
+            <a href="/darpdfr" data-mfb-label="Reporte Rol PDF" class="mfb-component__button--child">
+              <i class="mfb-component__child-icon ion-document-text"></i>
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+
+
+
+ 
+<script type="text/javascript">
+"use strict"
+/*
+      function buscar(uno){
+        location.href="/modificarpr?data="+escape(uno);
+      }
+*/     
+
+
+
+      function ver(uno){
+            //console.log(uno);
+                                          var datas = {};
+                                          datas.codr= uno;
+                                          
+                                        
+    
+                                          $.ajax({
+                                          type: 'POST',
+                                          data: JSON.stringify(datas),
+                                          contentType: 'application/json',
+                                          url: 'http://localhost:3000/buscarr',            
+                                          success: function(data) {
+                                            var x=JSON.parse(data);
+                                            
+                                            alertify.alert(
+
+                                              "<h5>DATOS DEL ROL</h5> <BR/>"+
+
+
+
+                                              "<span class='label label-info pull-left'><strong>Codigo Rol :  </strong> "+x[0]['cod_r']+"</span><BR/>"+
+
+
+                                              "<span class='pull-left'> NOMBRE DEL ROL  :    "+x[0]['nombre_r']+"</span><br>"+
+
+                                              
+                                              "<span class='pull-left'>DESCRIPCION :  " +x[0]['descrip_r']+"</span> <br>"
+
+
+
+
+                                              );
+                                             return false;
+                            
+                                             }
+                                                      });
+
+           /* */
+            }
+
+      function borrar(uno,dos){
+
+       alertify.confirm("<p>Desea Eliminar El Rol  "+uno+"</p>", function (e) {
+                if (e) {       
+                                       var datas = {};
+                                          datas.codr= dos;
+                                          
+                                           
+    
+                                          $.ajax({
+                                          type: 'POST',
+                                          data: JSON.stringify(datas),
+                                          contentType: 'application/json',
+                                          url: 'http://localhost:3000/eliminarr',            
+                                          success: function(data) {
+                                          window.location.href="/roles";
+                            
+                                             }
+                                                      });    
+                                                                        
+       
+
+                        } else { 
+
+
+                                }
+          }); 
+      }
+
+
+    $(function(){
+      $("div.holder").jPages({
+        containerID : "tablu",
+        previous : "Anterior",
+        next : "Siguiente",
+        perPage :5 ,
+        delay : 70
+      });
+    });
+    </script>
+  
+
+
+
+
+</body>
+
+
+        
+   
+
+</html>

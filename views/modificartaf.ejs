@@ -1,0 +1,118 @@
+<%- include menu.ejs%>
+
+<div class="shadow cajacentral well ">
+<form class="form-horizontal" id="log" action="/modificaratfs" method="POST"  >
+ <fieldset>
+    <legend>Modificar Tipo Activo-Fijo</legend>
+          <div class="form-group">
+              <label for="inputEmail" class="col-lg-3 control-label">Codigo Tipo Activo Fijo</label>
+              <div class="col-lg-9">
+              <span class="label label-info pull-left"><%= taf[0].cod_taf %></span>
+                <input class="form-control"  name="codigotaf" placeholder="Codigo de Cuenta Ej 1-03-0001" type="hidden" value="<%= taf[0].cod_taf %>">
+              </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputEmail" class="col-lg-3 control-label">Nombre Tipo Activo Fijo</label>
+            <div class="col-lg-9">
+              <input class="form-control"  placeholder="Nombres Cuenta Contable " type="text" name="nombtaf" value="<%= taf[0].nombre_taf %>">
+            </div>
+          </div>
+
+           <div class="form-group">
+            <label for="inputEmail" class="col-lg-3 control-label">Cuenta Contable</label>
+            <div class="col-lg-9">
+                          <select class="form-control"   name="codcue" class="required">
+                        
+                        <%
+                        for (var i = 0; i < cu.length; i++) {
+                         %>
+                         
+                    <% if (taf[0].cod_cue==cu[i].cod_scu) {
+                      %>
+                        <option value="<%= cu[i].cod_scu%>" selected><%= cu[i].nombre_c%></option>
+                      <%
+
+                    }else{
+                         %>
+
+                       <option value="<%= cu[i].cod_scu%>" ><%= cu[i].nombre_c%></option>
+                        <% }
+                        }
+                        %>
+                      </select>
+            </div>
+          </div>
+
+           
+       
+          <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+               <button type="submit" class="btn btn-primary">Agregar</button>
+              <button type="reset" class="btn btn-default" onclick="location.href='/tipo_activosfijos'">Cancelar</button>
+              
+            </div>
+          </div>
+
+
+
+
+</fieldset>
+</form>
+</div>
+
+
+ <script type="text/javascript" src="/../js/jquery.validate.min.js"></script>
+    <script type="text/javascript">
+'use strict'
+
+        $(document).ready(function(){
+
+
+      $.validator.addMethod("codigo",function(value,element)
+{
+return this.optional(element) || /^\d{1}-\d{2}-\d{4}$/.test(value);
+},"Ingresa en mal Formato ");
+
+
+      $.validator.addMethod("letras",function(value,element)
+{
+return this.optional(element) || /^[a-zA-ZñÑéáíóúüÁÉÓÚÜ_]+( [a-zA-ZñÑéáíóúüÁÉÓÚÜ]+)*$/.test(value);
+},"Ingresa un nombre correcto");
+            
+            $("#log").validate({
+
+                rules:{
+                    "codigotaf":{
+                      required:true,
+                      codigo:true,
+                      },
+
+                      "nombtaf":{
+                         required:true,
+                         letras:true,
+                      }
+                   
+
+                    
+                   
+                },
+                messages: {
+                    codigotaf:{
+                        required:"Ingrese Codigo de la Cuenta Contable",
+                       },
+                       nombtaf:{
+                        required:"Ingrese un Nombre de Tipo de Activo Fijo",
+                       }
+                    
+                }
+
+            });
+        });
+    </script>
+
+</body>
+
+  
+
+</html>

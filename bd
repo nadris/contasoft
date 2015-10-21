@@ -1,0 +1,105 @@
+CREATE DATABASE contasoft;
+/// EMPIEZA SISTEMA CONTASOFT V2.0
+
+
+CREATE TABLE procesos(
+cod_p int AUTO_INCREMENT,
+nombre_p varchar(30) DEFAULT '',
+descrip_p varchar(200) DEFAULT '',
+url_p varchar(100) NOT null, 
+e_p int DEFAULT 1,
+KEY(cod_p)
+);
+
+
+
+
+CREATE TABLE roles(
+cod_r int AUTO_INCREMENT ,
+nombre_r varchar(50) NOT NULl,
+descrip_r varchar(200) DEFAULT'',
+e_r int DEFAULT 1,
+KEY(cod_r)
+);
+
+
+
+CREATE TABLE rolpro(
+codrp_r int NOT NULL,
+codrp_p int NOT NULL,
+KEY(codrp_r,codrp_p),
+FOREIGN KEY(codrp_r) REFERENCES roles(cod_r),
+FOREIGN KEY(codrp_p) REFERENCES procesos(cod_p)
+);
+
+
+CREATE TABLE usuarios(
+ci_u int NOT NULL,
+nomb_u varchar(50) NOT NULL,
+apellp_u varchar(50) NOT NULL DEFAULT '' ,
+apellm_u varchar(50) DEFAULT '' ,
+dir_u varchar(200) DEFAULT'',
+telf_u varchar(8) DEFAULT '', 
+foto_u varchar(50) DEFAULT 'defecto.jpg',
+fecha_nac_u date,
+cod_r int not null, 
+e_u int DEFAULT 1,
+KEY(ci_u),
+FOREIGN KEY(cod_r) REFERENCES roles(cod_r)
+);
+
+CREATE TABLE datos(
+cid_u int ,
+usuario varchar(20),
+clave varchar(20),
+e_d int DEFAULT 1,
+KEY(cid_u),
+FOREIGN KEY (cid_u) REFERENCES usuarios(ci_u)
+);
+
+Sprint 2
+
+create table cuenta_contable(
+cod_scu int AUTO_INCREMENT,
+cod_cuenta varchar(5) not null,
+nombre_c varchar(50) not null,
+grupo_c int not null,
+descrip_c varchar(200),
+vidautil_c int not null,
+e_c int default 1,
+KEY(cod_scu)
+);
+
+//desde aqui
+create table tipo_activofijo(
+cod_cue int,
+cod_serial int AUTO_INCREMENT,
+cod_taf varchar(9) not null,
+nombre_taf varchar(50) not null,
+e_taf int DEFAULT 1,
+key(cod_serial),
+foreign key (cod_cue) references cuenta_contable(cod_scu)
+);
+
+
+CREATE TABLE unidades(
+cod_unid int AUTO_INCREMENT not null,
+nombre_unid VARCHAR(50) not null default'',
+descrip_unid varchar(200)  default '',
+dir_unid varchar(200) not null default'',
+e_un int default 1,
+key(cod_unid)
+);
+
+
+CREATE TABLE responsables(
+ci_resp int not null,
+nomb_r varchar(50) NOT NULL,
+apellp_r varchar(50) NOT NULL DEFAULT '' ,
+apellm_r varchar(50) DEFAULT '' ,
+dir_r varchar(200) default '',
+telf_r varchar(8) default'',
+codr_u int not null,
+key(ci_resp,codr_u),
+foreign key (codr_u) references unidades(cod_unid)
+);

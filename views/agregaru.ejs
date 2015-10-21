@@ -1,0 +1,232 @@
+<%- include menu.ejs%>
+
+
+
+
+
+	<div class="shadow cajacentral well ">
+    <form class="form-horizontal" id="log" action="/agregarusus" method="POST" enctype="multipart/form-data" class="dropzone" id="my-dropzone">
+  <fieldset>
+    <legend>Agregar Usuario</legend>
+    <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label">Cedula Identidad</label>
+      <div class="col-lg-10">
+        <input class="form-control"  name="cedula" placeholder="Cedula de Identidad" type="text">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label">Nombres</label>
+      <div class="col-lg-10">
+        <input class="form-control"  placeholder="Nombres Completos" type="text" name="nomb">
+      </div>
+    </div>
+     <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label">Apellido Paterno</label>
+      <div class="col-lg-10">
+        <input class="form-control"  placeholder="Apellido Paterno" type="text" name="ap">
+      </div>
+    </div>
+     <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label">Apellido Materno</label>
+      <div class="col-lg-10">
+        <input class="form-control"  placeholder="Apellido Materno" type="text" name="am">
+      </div>
+    </div>
+      <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label">Telefono</label>
+      <div class="col-lg-4">
+        <input class="form-control"  placeholder="Telefono" type="text" name="tel">
+      </div>
+      <label for="inputEmail" class="col-lg-2 control-label">Fecha Nac </label>
+      <div class="col-lg-4">
+          <input class="form-control" id="datepicker2" type="date" class="in"  name="fecha" > 
+      </div>
+
+      
+
+    </div>
+
+       <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label">Foto de Usuario </label>
+      <div class="col-lg-4">
+        <input class="btn btn-success" type="file" name="images">
+      </div>
+      <label for="inputEmail" class="col-lg-1 control-label"></label>
+
+        <label for="inputEmail" class="col-lg-1 control-label">Rol</label>
+      <div class="col-lg-4">
+  
+        <select class="form-control"  id="rolu" name="rolu" class="required">
+          
+          <%
+          for (var i = 0; i < ro.length; i++) {
+           %>
+
+          <option value="<%= ro[i].cod_r%>"><%= ro[i].nombre_r%></option> 
+          <% 
+          }
+          %>
+        </select>
+      </div>
+      
+    </div>
+
+
+    <div class="form-group">
+      <label for="textArea" class="col-lg-2 control-label">Direccion de Domicilio</label>
+      <div class="col-lg-10">
+        <textarea style="width: 409px; height: 193px;" class="form-control" rows="3" id="textArea" name="dire"></textarea>
+        <span class="help-block">Describa correctamente y completamente  la direccion .</span>
+      </div>
+
+    </div>
+     <div class="form-group">
+      <label for="textArea" class="col-lg-2 control-label">Clave Usuario:</label>
+      <div class="col-lg-4">
+      <div class="input-group">
+    <input class="form-control" type="password" name="clave1" id="clave1" value="admin">
+    <span class="input-group-btn">
+      
+    </span>
+  </div>
+        </div>
+
+       <label for="textArea" class="col-lg-2 control-label">Repetir Clave</label>
+      <div class="col-lg-4">
+      <div class="input-group">
+    <input class="form-control" type="password" name="clave2" id="clave2" value="admin">
+    <span class="input-group-btn">
+      
+    </span>
+  </div>
+      
+      </div>
+    </div>
+
+
+
+ 
+    <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+         <button type="submit" class="btn btn-primary">Agregar</button>
+        <button type="reset" class="btn btn-default" onclick="location.href='/usuarios'">Cancelar</button>
+        
+      </div>
+    </div>
+
+
+
+
+
+<div class="form-group">
+  
+</div>
+
+
+
+  </fieldset>
+</form>
+
+    </div>
+
+
+ <script type="text/javascript">
+        $(document).ready(function(){
+    $("#clave2").focus(function(){
+        this.type = "text";
+    }).blur(function(){
+        this.type = "password";
+    })
+      $("#clave1").focus(function(){
+        this.type = "text";
+    }).blur(function(){
+        this.type = "password";
+    })
+
+    
+});
+    </script>
+
+ <script type="text/javascript" src="/../js/jquery.validate.min.js"></script>
+    <script type="text/javascript">
+'use strict'
+
+        $(document).ready(function(){
+          jQuery.validator.addMethod("vc",function(value,element){
+                                 var response=0;
+                                         var datas = {};
+                                          datas.ciu = value;
+                                          $.ajax({
+                                          type: 'POST',
+                                          async:false,
+                                          data: JSON.stringify(datas),
+                                          contentType: 'application/json',
+                                          url: '/vc',            
+                                          success: function(data) {
+                                           response=data;
+                                           //alert(response);
+                                           }
+                                         });
+                                          return (response==1);}, "Cedula de Identidad ya registrada en el Sistema");
+            
+            $("#log").validate({
+
+                rules:{
+                    "cedula":{
+                      required:true,
+                      vc:true,
+                      minlength:7,
+                      maxlength:8,},
+
+                      "nomb":{
+                        required:true,
+                      },
+                      "ap":{
+                        required:true,
+                      },
+                      "tel":{
+                        digits:true,
+                        minlength:7,
+                        maxlength:8,
+                      },
+                      "clave1":{
+                        equalTo: "#clave2",
+
+                      }
+                   
+                },
+                messages: {
+                    cedula:{
+                        required:"Ingrese Cedula de Identidad",
+                        vc:"Cedula de Identidad ya registrada en el Sistema",
+                        minlength:"Minimo una cadena de 7 Numeros",
+                        maxlength:"Maximo una cadena de 8 Numeros",   
+                    },
+                    nomb:{
+                      required:"Ingrese un Nombre",
+                    },
+                    ap:{
+                      required:"Ingrese un Apellido Paterno",
+                    },
+                    tel:{
+                      digits:"Ingrese solo Numeros",
+                       minlength:"Minimo una cadena de 7 Numeros",
+                       maxlength:"Maximo una cadena de 8 Numeros",
+                    },
+                    clave1:{
+                      equalTo:"Las claves deben ser iguales",
+                    }
+
+
+                    
+                }
+
+            });
+        });
+    </script>
+
+</body>
+
+  
+
+</html>

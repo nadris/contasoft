@@ -1,0 +1,100 @@
+
+
+
+<%- include menu.ejs%>
+
+
+  <div class="shadow cajacentral well ">
+    <form class="form-horizontal" id="log" action="/agregarprs" method="post">
+  <fieldset>
+    <legend>Agregar Proceso</legend>
+    <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label">Nombre del Rol </label>
+      <div class="col-lg-10">
+        <input class="form-control"  placeholder="Nombre del Proceso" type="text" name="nombpr">
+      </div>
+    </div>
+      <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label">URL</label>
+      <div class="col-lg-10">
+        <input class="form-control"  placeholder="Ejemplo: /usuarios o /datos" type="text" name="urlpr">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="textArea" class="col-lg-2 control-label">Descripcion </label>
+      <div class="col-lg-10">
+        <textarea style="width: 409px; height: 193px;" class="form-control" rows="3" id="textArea" name="descres"></textarea>
+        <span class="help-block">Describa correctamente y completamente  el Proceso .</span>
+      </div>
+    </div>
+
+ 
+    <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+         <button type="submit" class="btn btn-primary">Agregar</button>
+        <a href="/procesos" class="btn btn-default" >Cancelar</a>
+        
+      </div>
+    </div>
+  </fieldset>
+</form>
+
+
+
+
+
+    </div>
+
+    <script type="text/javascript" src="/../js/jquery.validate.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){                      
+            $("#log").validate({
+
+                rules:{
+                    "nombpr":{
+                      required:true,
+                      minlength:3,
+                      maxlength:30,},
+
+                      "urlpr":{
+                      required:true,
+                      minlength:3,
+                      maxlength:100,
+                      },
+                      "descres":{
+                        maxlength:200,
+
+                      }
+
+                   
+                },
+                messages: {
+                    nombpr:{
+                        required:"Ingrese Nombre del Proceso",
+                        minlength:"Minimo una cadena de 3 letras",
+                        maxlength:"Maximo una cadena de 30 letras",   
+                    },
+                    urlpr:{
+                        required:"Ingrese Nombre del Proceso",
+                        minlength:"Minimo una cadena de 3 letras",
+                        maxlength:"Maximo una cadena de 30 letras",  
+                    
+                    },
+                    descres:{
+                        maxlength:"Maximo una cadena de 200 letras",  
+                    }
+                    
+                }
+
+            });
+        });
+    </script>
+
+
+
+</body>
+
+
+
+</html>

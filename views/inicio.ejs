@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title><%= titulo %></title>
+	 <script src="/../javascripts/jquery.min.js"></script>
+	<script type="text/javascript" src="/../js/jquery.backstretch.min.js"></script>
+	<link rel="stylesheet" href="/../css/index/index.css">
+
+	<script type="text/javascript">
+
+	var themes = {
+    "celerun" : "/../css/temas/celerun.css",
+    "flaty" : "/../css/temas/flaty.css",
+    "paper" : "/../css/temas/paper.css",
+    "yeti" : "/../css/temas/yeti.css",
+    "united" : "/../css/temas/united.css",
+	}
+	$(function(){
+   	var themesheet = $('<link href="'+themes['paper']+'" rel="stylesheet" />');
+    themesheet.appendTo('head');
+
+    	$('.theme-link').click(function(){
+       	var themeurl = themes[$(this).attr('data-theme')]; 
+        themesheet.attr('href',themeurl);
+    });
+});
+</script>	
+
+
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.8/jquery.validate.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            
+            $("#log").validate({
+
+                rules:{
+                    "usuario":{
+                      required:true,
+                        minlength:5
+                        
+                                           
+                               },
+                    "clave":{
+                      minlength:5,
+                        required:true
+                        
+                    }
+                },
+                messages: {
+                    usuario:{
+                        minlength: "Ingrese mas de 5 Caracteres",
+                        required:"Ingrese Usuario"
+                        
+                    },
+                    clave:{
+                      minlength: "Ingrese mas de 5 Caracteres",
+                        required:"Ingrese Clave"
+                    }
+                }
+
+            });
+        });
+    </script>
+
+</head>
+<body>
+	
+	<div class="col-lg-4 logeo">
+	<div class="panel panel-primary">
+  		<div class="panel-heading">
+  		<h3 class="panel-title"><center>INICIAR SESION</center> </h3>
+    	</div>
+   			<div class="panel-body ">
+   				<form action="validar" method="post" id="log" >
+   					<div class="form-group">	
+					<label  class="col-lg-2 control-label">Usuario</label>
+       				<div class="col-lg-10"><input class="form-control" name="usuario"  type="text"" value="<%=vacio%>"> </div>
+        			<div class="esp"></div>
+
+        			<label  class="col-lg-2 control-label">Clave</label>
+        			<div class="col-lg-10">
+        			<input class="form-control" name="clave"  type="password" >
+       				</div>
+       				<div class="esp"></div>
+       				<center>
+       				<input type="submit" name="" value="Acceder"  class="btn btn-primary">
+       				</center>
+       				</div>
+   				</form>	
+
+
+         <center><%= men%></center>
+            
+
+       
+
+
+			</div>
+	</div>
+	</div>
+
+<script>
+    $.backstretch("/../imagenes/sedes.jpg", {speed: (500)});
+</script>
+
+
+</body>
+
+
+</html>

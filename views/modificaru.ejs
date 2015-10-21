@@ -1,0 +1,233 @@
+<%- include menu.ejs%>
+
+
+	<div class="shadow cajacentral well ">
+    <form class="form-horizontal" id="log" action="/modificarusus" method="POST" enctype="multipart/form-data" class="dropzone" id="my-dropzone">
+  <fieldset>
+    <legend>Modificar Usuario</legend>
+    <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label">Cedula Identidad</label>
+      <div class="col-lg-10">
+          <label><%= usu[0].ci_u%></label>
+        <input class="form-control"  name="cedula" placeholder="Cedula de Identidad" type="hidden" value="<%= usu[0].ci_u%>">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label">Nombres</label>
+      <div class="col-lg-10">
+        <input class="form-control"  placeholder="Nombres Completos" type="text" name="nomb" value="<%= usu[0].nomb_u%>">
+      </div>
+    </div>
+     <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label">Apellido Paterno</label>
+      <div class="col-lg-10">
+        <input class="form-control"  placeholder="Apellido Paterno" type="text" name="ap" value="<%= usu[0].apellp_u%>">
+      </div>
+    </div>
+     <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label">Apellido Materno</label>
+      <div class="col-lg-10">
+        <input class="form-control"  placeholder="Apellido Materno" type="text" name="am" value="<%= usu[0].apellm_u%>">
+      </div>
+    </div>
+      <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label">Telefono</label>
+      <div class="col-lg-4">
+        <input class="form-control"  placeholder="Telefono" type="text" name="tel" value="<%= usu[0].telf_u%>">
+      </div>
+      <label for="inputEmail" class="col-lg-2 control-label">Fecha Nac </label>
+      <div class="col-lg-4">
+          <input class="form-control" id="datepicker2" type="date" class="in"  name="fecha" value="<%= usu[0].fecha%>" > 
+      </div>
+    </div>
+
+       <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label">Nueva Foto </label>
+      <div class="col-lg-4">
+        <input class="btn btn-success" type="file" name="images">
+      </div>
+      <label for="inputEmail" class="col-lg-1 control-label"></label>
+
+        <label for="inputEmail" class="col-lg-1 control-label">Rol</label>
+      <div class="col-lg-4">
+  
+        <select class="form-control"  id="rolu" name="rolu" class="required">
+          
+          <%
+          for (var i = 0; i < ro.length; i++) {
+            if(usu[0].cod_r==ro[i].cod_r){
+              %>
+              <option value="<%= ro[i].cod_r%>" selected ><%= ro[i].nombre_r%></option>
+            <%
+
+            }else{
+              %>
+
+               <option value="<%= ro[i].cod_r%>"><%= ro[i].nombre_r%></option> 
+            <% 
+            }
+          }
+          %>
+        </select>
+      </div>
+      
+    </div>
+
+
+    <div class="form-group">
+      <label for="textArea" class="col-lg-2 control-label">Direccion de Domicilio</label>
+      <div class="col-lg-5">
+        <textarea style="width: 409px; height: 193px;" class="form-control" rows="3" id="textArea" name="dire"><%= usu[0].dir_u%></textarea>
+        <span class="help-block">Describa correctamente y completamente  la direccion .</span>
+      </div>
+      <div class="col-lg-1">
+      </div>
+      <div class="col-lg-2">
+       <label class=" control-label">Foto Anterior</label>
+
+      <img src="/fotos/<%= usu[0].foto_u%>" alt="" width="150px" height="150px">
+      <input type="hidden" value="<%= usu[0].foto_u%>" name="fotoant">
+      </div>
+
+    </div>
+     <div class="form-group">
+      <label for="textArea" class="col-lg-2 control-label">Clave Usuario:</label>
+      <div class="col-lg-4">
+      <div class="input-group">
+    <input class="form-control" type="password" name="clave1" id="clave1" value="<%= clave%>">
+    <span class="input-group-btn">
+      
+    </span>
+  </div>
+        </div>
+
+       <label for="textArea" class="col-lg-2 control-label">Repetir Clave</label>
+      <div class="col-lg-4">
+      <div class="input-group">
+    <input class="form-control" type="password" name="clave2" id="clave2" value="<%= clave%>">
+    <span class="input-group-btn">
+      
+    </span>
+  </div>
+      
+      </div>
+    </div>
+
+
+
+ 
+    <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+         <button type="submit" class="btn btn-primary">Modificar</button>
+        <button type="reset" class="btn btn-default" onclick="location.href='/usuarios'">Cancelar</button>
+        
+      </div>
+    </div>
+
+
+
+
+
+<div class="form-group">
+  
+</div>
+
+
+
+  </fieldset>
+</form>
+
+    </div>
+
+
+ <script type="text/javascript">
+        $(document).ready(function(){
+    $("#clave2").focus(function(){
+        this.type = "text";
+    }).blur(function(){
+        this.type = "password";
+    })
+      $("#clave1").focus(function(){
+        this.type = "text";
+    }).blur(function(){
+        this.type = "password";
+    })
+
+    
+});
+    </script>
+
+ <script type="text/javascript" src="/../js/jquery.validate.min.js"></script>
+    <script type="text/javascript">
+'use strict'
+
+        $(document).ready(function(){
+          jQuery.validator.addMethod("vc",function(value,element){
+                                 var response=0;
+                                         var datas = {};
+                                          datas.ciu = value;
+                                          $.ajax({
+                                          type: 'POST',
+                                          async:false,
+                                          data: JSON.stringify(datas),
+                                          contentType: 'application/json',
+                                          url: '/vc',            
+                                          success: function(data) {
+                                           response=data;
+                                           //alert(response);
+                                           }
+                                         });
+                                          return (response==1);}, "Cedula de Identidad ya registrada en el Sistema");
+            
+            $("#log").validate({
+
+                rules:{
+                 
+
+                      "nomb":{
+                        required:true,
+                      },
+                      "ap":{
+                        required:true,
+                      },
+                      "tel":{
+                        digits:true,
+                        minlength:7,
+                        maxlength:8,
+                      },
+                      "clave1":{
+                        equalTo: "#clave2",
+
+                      }
+                   
+                },
+                messages: {
+            
+                    nomb:{
+                      required:"Ingrese un Nombre",
+                    },
+                    ap:{
+                      required:"Ingrese un Apellido Paterno",
+                    },
+                    tel:{
+                      digits:"Ingrese solo Numeros",
+                       minlength:"Minimo una cadena de 7 Numeros",
+                       maxlength:"Maximo una cadena de 8 Numeros",
+                    },
+                    clave1:{
+                      equalTo:"Las claves deben ser iguales",
+                    }
+
+
+                    
+                }
+
+            });
+        });
+    </script>
+
+</body>
+
+  
+
+</html>

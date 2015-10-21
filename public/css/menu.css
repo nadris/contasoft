@@ -1,0 +1,77 @@
+.esp{
+	height: 50px;
+}
+
+.flaty{
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	background-color: #2C3E50;
+}
+.paper{
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	background-color: #2196F3;
+}
+.yeti{
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	background-color: #008CBA;
+}
+.united{
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	background-color: #DD4814;
+}
+.flaty:hover{
+		box-shadow: 2px 2px 2px rgba(68,68,68,0.6);
+
+}
+.selcol{
+	display: inline-block;
+}
+.error{
+	color: red !important;
+
+}
+.foto{
+	
+	width: 230px;
+	margin-left: 0px !important;
+
+}
+
+.cuerpo{
+	background-color: #E6E6E6;
+}
+.borde{
+
+	border-radius:  50%;
+	border:2px solid #798D8F;
+}
+.cajacentral{
+	padding-left: 60px;
+	margin-left: 20px;
+	box-shadow: 1px 
+
+
+}
+.shadow{
+	-moz-box-shadow:    3px 3px 5px 6px #ccc !important;
+  -webkit-box-shadow: 3px 3px 5px 6px #ccc !important;
+  box-shadow:         3px 3px 5px 6px #ccc !important;
+}
+.caja1{
+
+}
+.tam{
+	width: 70px !important;
+	padding:2px !important;
+}
+.tam2{
+	width: 90px !important;
+	padding:2px !important;
+}
